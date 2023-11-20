@@ -60,6 +60,7 @@ class AuthClient extends AbstractClient
                 'client_secret' => $this->clientSecret,
                 'redirect_uri' => $redirectUri,
                 'code' => $code,
+                'grant_type' => 'authorization_code',
             ],
         ];
 
