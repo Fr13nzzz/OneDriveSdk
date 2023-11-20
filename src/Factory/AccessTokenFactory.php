@@ -16,7 +16,7 @@ final class AccessTokenFactory
             $jsonObject['expires_in'] ?? throw new UnexpectedJsonException('Missing key', 1700500700),
             $jsonObject['scope'] ?? throw new UnexpectedJsonException('Missing key', 1700500705),
             $jsonObject['access_token'] ?? throw new UnexpectedJsonException('Missing key', 1700500709),
-            $jsonObject['refresh_token'] ?? throw new UnexpectedJsonException('Missing key', 1700500713),
+            $jsonObject['refresh_token'] ?? '',
         );
     }
 }
