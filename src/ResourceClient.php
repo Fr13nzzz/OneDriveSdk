@@ -29,7 +29,7 @@ class ResourceClient extends AbstractClient
     {
         $requestUrl = self::ONE_GRAPH_URL . $resourcePath;
         foreach ($pathPlaceholderValues as $placeHolderName => $placeholderValue) {
-            str_replace("{{$placeHolderName}}", $placeholderValue, $requestUrl);
+            $requestUrl = str_replace("{{$placeHolderName}}", $placeholderValue, $requestUrl);
         }
 
         return $requestUrl;
