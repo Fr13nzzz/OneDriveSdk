@@ -68,6 +68,23 @@ class AuthClient extends AbstractClient
         return $accessTokenFactory->fromJsonObject($this->post($requestUrl, $options));
     }
 
+    public function refreshToken(string $redirectUri, string $refreshToken): AccessToken
+    {
+        $requestUrl = $this->getBaseUrl() . Authentication::TOKEN->value;
+        $options = [
+            'form_params' => [
+                'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret,
+                'redirect_uri' => $redirectUri,
+                'refresh_token' => $refreshToken,
+                'grant_type' => 'refresh_token',
+            ],
+        ];
+
+        $accessTokenFactory = new AccessTokenFactory();
+        return $accessTokenFactory->fromJsonObject($this->post($requestUrl, $options));
+    }
+
     /**
      * @return string
      */
