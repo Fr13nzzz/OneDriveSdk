@@ -13,4 +13,5 @@ enum OneDriveScope: string
     case READ_WRITE_FILES_APP_FOLDER = 'Files.ReadWrite.AppFolder';
     case READ_FILES_SELECTED = 'Files.Read.Selected';
     case READ_WRITE_FILES_SELECTED = 'Files.ReadWrite.Selected';
+    case OFFLINE_ACCESS = 'offline_access';
 }

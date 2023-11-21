@@ -8,7 +8,7 @@ use Balu\OneDriveSdk\Exception\UnexpectedJsonException;
 use Balu\OneDriveSdk\Exception\UnexpectedStatusCodeException;
 use Balu\OneDriveSdk\Factory\AccessTokenFactory;
 use Balu\OneDriveSdk\Model\AccessToken;
-use Balu\OneDriveSdk\Model\Enum\EndPoint;
+use Balu\OneDriveSdk\Model\Enum\EndPoints\Authentication;
 use Balu\OneDriveSdk\Model\Enum\OneDriveScope;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -29,7 +29,7 @@ class AuthClient extends AbstractClient
      */
     public function getLoginUrl(array $scopes, string $redirectUri, array $additionalQueryParams = []): string
     {
-        $requestUrl = $this->getBaseUrl() . EndPoint::AUTHORIZE->value;
+        $requestUrl = $this->getBaseUrl() . Authentication::AUTHORIZE->value;
         $queryParams = [
             'client_id' => $this->clientId,
             'response_type' => 'code',
@@ -53,7 +53,7 @@ class AuthClient extends AbstractClient
      */
     public function fetchAccessToken(string $redirectUri, string $code): AccessToken
     {
-        $requestUrl = $this->getBaseUrl() . EndPoint::TOKEN->value;
+        $requestUrl = $this->getBaseUrl() . Authentication::TOKEN->value;
         $options = [
             'form_params' => [
                 'client_id' => $this->clientId,

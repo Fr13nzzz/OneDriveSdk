@@ -6,10 +6,13 @@ namespace Balu\OneDriveSdk;
 
 use Balu\OneDriveSdk\Exception\UnexpectedStatusCodeException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractClient
 {
+    public const ONE_GRAPH_URL = 'https://graph.microsoft.com/v1.0';
+
     protected ?Client $client = null;
 
     public function __construct(
@@ -23,14 +26,29 @@ abstract class AbstractClient
     /**
      * @param string $url
      * @param array $options
+     * @param string|null $token
      * @param int $expectedStatusCode
      * @return array
      * @throws UnexpectedStatusCodeException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
-    public function post(string $url, array $options, int $expectedStatusCode = 200): array
+    public function post(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
     {
+        if ($token !== null) {
+            $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
+        }
+
         $response = $this->client->post($url, $options);
+        return $this->parseResponse($response, $expectedStatusCode);
+    }
+
+    public function get(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
+    {
+        if ($token !== null) {
+            $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
+        }
+
+        $response = $this->client->get($url, $options);
         return $this->parseResponse($response, $expectedStatusCode);
     }
 
@@ -54,5 +72,15 @@ abstract class AbstractClient
         }
 
         return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function getAuthorizationHeader(string $token): array
+    {
+        return [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Host' => 'graph.microsoft.com',
+            ],
+        ];
     }
 }
