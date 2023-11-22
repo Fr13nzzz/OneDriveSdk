@@ -13,7 +13,7 @@ final class AccessTokenFactory
         return new AccessToken(
             $jsonObject['token_type'] ?? '',
             $jsonObject['expires_in'] ?? 0,
-            $jsonObject['scope'] ?? [],
+            $jsonObject['scope'] ?? '',
             $jsonObject['access_token'] ?? '',
             $jsonObject['refresh_token'] ?? '',
         );
