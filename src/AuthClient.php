@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Balu\OneDriveSdk;
 
-use Balu\OneDriveSdk\Exception\UnexpectedJsonException;
 use Balu\OneDriveSdk\Exception\UnexpectedStatusCodeException;
 use Balu\OneDriveSdk\Factory\AccessTokenFactory;
 use Balu\OneDriveSdk\Model\AccessToken;
@@ -47,7 +46,6 @@ class AuthClient extends AbstractClient
      * @param string $redirectUri
      * @param string $code
      * @return AccessToken
-     * @throws UnexpectedJsonException
      * @throws UnexpectedStatusCodeException
      * @throws GuzzleException
      */
