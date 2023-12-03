@@ -11,7 +11,7 @@ class DriveItemClient extends ResourceClient
     public function getItem(string $driveId, string $itemId, array $options = [], array $queryParameters = []): array
     {
         return $this->getByResourcePath(
-            DriveItem::GET_ITEM,
+            DriveItem::ITEM,
             ['drive-id' => $driveId, 'item-id' => $itemId],
             $options,
             $queryParameters
@@ -58,7 +58,7 @@ class DriveItemClient extends ResourceClient
         $options = array_merge_recursive(['body' => json_encode($jsonPayload)], $options);
 
         return $this->patchByResourcePath(
-            DriveItem::CHILDREN,
+            DriveItem::ITEM,
             ['drive-id' => $driveId, 'item-id' => $parentId],
             $options,
             $queryParameters
