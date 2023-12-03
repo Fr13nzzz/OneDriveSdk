@@ -64,4 +64,17 @@ class DriveItemClient extends ResourceClient
             $queryParameters
         );
     }
+
+    public function copy(string $driveId, string $parentId, array $jsonPayload, array $options = [], array $queryParameters = []): array
+    {
+        $options = array_merge_recursive(['headers' => ['Content-Type' => 'application/json']], $options);
+        $options = array_merge_recursive(['body' => json_encode($jsonPayload)], $options);
+
+        return $this->postByResourcePath(
+            DriveItem::ITEM_COPY,
+            ['drive-id' => $driveId, 'item-id' => $parentId],
+            $options,
+            $queryParameters
+        );
+    }
 }
