@@ -25,7 +25,7 @@ class DriveClient extends ResourceClient
 
     public function listRootChildren(string $id, array $options = [], array $queryParameters = []): array
     {
-        return $this->getByResourcePath(Drive::CHILDREN, ['drive-id' => $id], $options, $queryParameters);
+        return $this->getByResourcePath(Drive::ROOT_CHILDREN, ['drive-id' => $id], $options, $queryParameters);
     }
 
     public function getBySpecialId(string $id, array $options = [], array $queryParameters = []): array
