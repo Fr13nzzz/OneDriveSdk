@@ -54,7 +54,7 @@ class DriveItemClient extends ResourceClient
 
     public function update(string $driveId, string $parentId, array $jsonPayload, array $options = [], array $queryParameters = []): array
     {
-        $options = array_merge_recursive(['Headers' => ['Content-Type' => 'application/json']], $options);
+        $options = array_merge_recursive(['headers' => ['Content-Type' => 'application/json']], $options);
         $options = array_merge_recursive(['body' => json_encode($jsonPayload)], $options);
 
         return $this->patchByResourcePath(
