@@ -42,6 +42,34 @@ abstract class AbstractClient
         return $this->parseResponse($response, $expectedStatusCode);
     }
 
+    /**
+     * @param string $url
+     * @param array $options
+     * @param string|null $token
+     * @param int $expectedStatusCode
+     * @return array
+     * @throws UnexpectedStatusCodeException
+     * @throws GuzzleException
+     */
+    public function patch(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
+    {
+        if ($token !== null) {
+            $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
+        }
+
+        $response = $this->client->patch($url, $options);
+        return $this->parseResponse($response, $expectedStatusCode);
+    }
+
+    /**
+     * @param string $url
+     * @param array $options
+     * @param string|null $token
+     * @param int $expectedStatusCode
+     * @return array
+     * @throws GuzzleException
+     * @throws UnexpectedStatusCodeException
+     */
     public function get(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
     {
         if ($token !== null) {
