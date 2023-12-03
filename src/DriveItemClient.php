@@ -74,7 +74,8 @@ class DriveItemClient extends ResourceClient
             DriveItem::ITEM_COPY,
             ['drive-id' => $driveId, 'item-id' => $parentId],
             $options,
-            $queryParameters
+            $queryParameters,
+            202
         );
     }
 }
