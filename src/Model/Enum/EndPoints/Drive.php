@@ -11,4 +11,5 @@ enum Drive: string implements ResourceEndpointInterface
     case DRIVE_BY_ID = '/drives/{drive-id}';
     case DRIVE_BY_SPECIAL_ID = '/me/drive/special/{special-id}';
     case DRIVE_BY_USER_ID = '/users/{user-id}/drive';
+    case ROOT_CHILDREN = '/drives/{drive-id}/root/children';
 }
