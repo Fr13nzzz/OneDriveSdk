@@ -78,15 +78,4 @@ class DriveItemClient extends ResourceClient
             202
         );
     }
-
-    public function getDownloadUrl(string $driveId, string $parentId, array $options = [], array $queryParameters = []): array
-    {
-        $queryParameters = array_merge_recursive(['select' => 'id,@microsoft.graph.downloadUrl'], $queryParameters);
-        return $this->getByResourcePath(
-            DriveItem::ITEM_CONTENT,
-            ['drive-id' => $driveId, 'item-id' => $parentId],
-            $options,
-            $queryParameters
-        );
-    }
 }
