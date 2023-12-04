@@ -87,14 +87,14 @@ class DriveItemClient extends ResourceClient
         array $options = [],
         array $queryParameters = []
     ): array {
-        $options = array_merge_recursive(['contents' => $content], $options);
+        $options = array_merge_recursive(['body' => $content], $options);
 
         return $this->putByResourcePath(
             DriveItem::NEW_ITEM_CONTENT,
             ['drive-id' => $driveId, 'parent-id' => $parentId, 'filename' => $fileName],
             $options,
             $queryParameters,
-            201
+            200
         );
     }
 
@@ -105,14 +105,14 @@ class DriveItemClient extends ResourceClient
         array $options = [],
         array $queryParameters = []
     ): array {
-        $options = array_merge_recursive(['contents' => $content], $options);
+        $options = array_merge_recursive(['body' => $content], $options);
 
         return $this->putByResourcePath(
             DriveItem::ITEM_CONTENT,
             ['drive-id' => $driveId, 'parent-id' => $parentId],
             $options,
             $queryParameters,
-            201
+            200
         );
     }
 }
