@@ -67,6 +67,25 @@ abstract class AbstractClient
      * @param string|null $token
      * @param int $expectedStatusCode
      * @return array
+     * @throws UnexpectedStatusCodeException
+     * @throws GuzzleException
+     */
+    public function put(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
+    {
+        if ($token !== null) {
+            $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
+        }
+
+        $response = $this->client->put($url, $options);
+        return $this->parseResponse($response, $expectedStatusCode);
+    }
+
+    /**
+     * @param string $url
+     * @param array $options
+     * @param string|null $token
+     * @param int $expectedStatusCode
+     * @return array
      * @throws GuzzleException
      * @throws UnexpectedStatusCodeException
      */

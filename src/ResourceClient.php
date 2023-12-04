@@ -83,6 +83,28 @@ abstract class ResourceClient extends AbstractClient
     }
 
     /**
+     * @param ResourceEndpointInterface $resourcePath
+     * @param array $pathPlaceholderValues
+     * @param array $options
+     * @param array $queryParameters
+     * @param int $expectedStatusCode
+     * @return array
+     * @throws GuzzleException
+     * @throws UnexpectedStatusCodeException
+     */
+    public function putByResourcePath(
+        ResourceEndpointInterface $resourcePath,
+        array $pathPlaceholderValues,
+        array $options = [],
+        array $queryParameters = [],
+        int $expectedStatusCode = 200
+    ): array {
+        $requestUrl = $this->replaceUrlPlaceHolders($resourcePath->value, $pathPlaceholderValues);
+        $requestUrl = $this->addQueryParameters($requestUrl, $queryParameters);
+        return $this->put($requestUrl, $options, $this->token, $expectedStatusCode);
+    }
+
+    /**
      * @param string $resourcePath
      * @param array $pathPlaceholderValues
      * @return string

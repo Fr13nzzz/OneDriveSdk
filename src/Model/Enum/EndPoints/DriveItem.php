@@ -10,5 +10,6 @@ enum DriveItem: string implements ResourceEndpointInterface
     case ITEM_COPY = '/drives/{drive-id}/items/{item-id}/copy';
     case CHILDREN = '/drives/{drive-id}/items/{item-id}/children';
     case LIST_VERSIONS = '/drives/{drive-id}/items/{item-id}/versions';
-    case BY_ITEM_ID = '/drive/items/{item-id}/content';
+    case NEW_ITEM_CONTENT = '/drives/{drive-id}/items/{parent-id}:/{filename}:/content';
+    case ITEM_CONTENT = '/drives/{drive-id}/items/{item-id}/content';
 }

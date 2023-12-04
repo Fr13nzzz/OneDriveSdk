@@ -78,4 +78,41 @@ class DriveItemClient extends ResourceClient
             202
         );
     }
+
+    public function uploadFile(
+        string $driveId,
+        string $parentId,
+        string $fileName,
+        string $content,
+        array $options = [],
+        array $queryParameters = []
+    ): array {
+        $options = array_merge_recursive(['contents' => $content], $options);
+
+        return $this->putByResourcePath(
+            DriveItem::NEW_ITEM_CONTENT,
+            ['drive-id' => $driveId, 'parent-id' => $parentId, 'filename' => $fileName],
+            $options,
+            $queryParameters,
+            201
+        );
+    }
+
+    public function uploadToExistingFile(
+        string $driveId,
+        string $parentId,
+        string $content,
+        array $options = [],
+        array $queryParameters = []
+    ): array {
+        $options = array_merge_recursive(['contents' => $content], $options);
+
+        return $this->putByResourcePath(
+            DriveItem::ITEM_CONTENT,
+            ['drive-id' => $driveId, 'parent-id' => $parentId],
+            $options,
+            $queryParameters,
+            201
+        );
+    }
 }
