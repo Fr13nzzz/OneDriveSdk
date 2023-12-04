@@ -48,7 +48,7 @@ class DriveItemClient extends ResourceClient
             ['drive-id' => $driveId, 'item-id' => $parentId],
             $options,
             $queryParameters,
-            201
+            [201]
         );
     }
 
@@ -75,7 +75,7 @@ class DriveItemClient extends ResourceClient
             ['drive-id' => $driveId, 'item-id' => $parentId],
             $options,
             $queryParameters,
-            202
+            [202]
         );
     }
 
@@ -94,7 +94,7 @@ class DriveItemClient extends ResourceClient
             ['drive-id' => $driveId, 'parent-id' => $parentId, 'filename' => $fileName],
             $options,
             $queryParameters,
-            200
+            [200, 201]
         );
     }
 
@@ -111,8 +111,7 @@ class DriveItemClient extends ResourceClient
             DriveItem::ITEM_CONTENT,
             ['drive-id' => $driveId, 'parent-id' => $parentId],
             $options,
-            $queryParameters,
-            200
+            $queryParameters
         );
     }
 }

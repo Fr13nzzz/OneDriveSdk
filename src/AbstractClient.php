@@ -27,91 +27,91 @@ abstract class AbstractClient
      * @param string $url
      * @param array $options
      * @param string|null $token
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
-     * @throws UnexpectedStatusCodeException
      * @throws GuzzleException
+     * @throws UnexpectedStatusCodeException
      */
-    public function post(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
+    public function post(string $url, array $options, string $token = null, array $expectedStatusCodes = [200]): array
     {
         if ($token !== null) {
             $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
         }
 
         $response = $this->client->post($url, $options);
-        return $this->parseResponse($response, $expectedStatusCode);
+        return $this->parseResponse($response, $expectedStatusCodes);
     }
 
     /**
      * @param string $url
      * @param array $options
      * @param string|null $token
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
-     * @throws UnexpectedStatusCodeException
      * @throws GuzzleException
+     * @throws UnexpectedStatusCodeException
      */
-    public function patch(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
+    public function patch(string $url, array $options, string $token = null, array $expectedStatusCodes = [200]): array
     {
         if ($token !== null) {
             $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
         }
 
         $response = $this->client->patch($url, $options);
-        return $this->parseResponse($response, $expectedStatusCode);
+        return $this->parseResponse($response, $expectedStatusCodes);
     }
 
     /**
      * @param string $url
      * @param array $options
      * @param string|null $token
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
      * @throws UnexpectedStatusCodeException
      * @throws GuzzleException
      */
-    public function put(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
+    public function put(string $url, array $options, string $token = null, array $expectedStatusCodes = [200]): array
     {
         if ($token !== null) {
             $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
         }
 
         $response = $this->client->put($url, $options);
-        return $this->parseResponse($response, $expectedStatusCode);
+        return $this->parseResponse($response, $expectedStatusCodes);
     }
 
     /**
      * @param string $url
      * @param array $options
      * @param string|null $token
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
      * @throws GuzzleException
      * @throws UnexpectedStatusCodeException
      */
-    public function get(string $url, array $options, string $token = null, int $expectedStatusCode = 200): array
+    public function get(string $url, array $options, string $token = null, array $expectedStatusCodes = [200]): array
     {
         if ($token !== null) {
             $options = array_merge_recursive($options, $this->getAuthorizationHeader($token));
         }
 
         $response = $this->client->get($url, $options);
-        return $this->parseResponse($response, $expectedStatusCode);
+        return $this->parseResponse($response, $expectedStatusCodes);
     }
 
     /**
      * @param ResponseInterface $response
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
      * @throws UnexpectedStatusCodeException
      */
-    protected function parseResponse(ResponseInterface $response, int $expectedStatusCode): array
+    protected function parseResponse(ResponseInterface $response, array $expectedStatusCodes): array
     {
-        if ($response->getStatusCode() !== $expectedStatusCode) {
+        if (!in_array($response->getStatusCode(), $expectedStatusCodes)) {
             throw new UnexpectedStatusCodeException(
                 sprintf(
-                    'Unexpected status code. Expected %s but %s given',
-                    $expectedStatusCode,
+                    'Unexpected status code. Expected one of %s but %s given',
+                    implode(',', $expectedStatusCodes),
                     $response->getStatusCode()
                 ),
                 1700499946

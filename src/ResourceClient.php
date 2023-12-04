@@ -43,7 +43,7 @@ abstract class ResourceClient extends AbstractClient
      * @param array $pathPlaceholderValues
      * @param array $options
      * @param array $queryParameters
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
      * @throws GuzzleException
      * @throws UnexpectedStatusCodeException
@@ -53,11 +53,11 @@ abstract class ResourceClient extends AbstractClient
         array $pathPlaceholderValues,
         array $options = [],
         array $queryParameters = [],
-        int $expectedStatusCode = 200
+        array $expectedStatusCodes = [200]
     ): array {
         $requestUrl = $this->replaceUrlPlaceHolders($resourcePath->value, $pathPlaceholderValues);
         $requestUrl = $this->addQueryParameters($requestUrl, $queryParameters);
-        return $this->post($requestUrl, $options, $this->token, $expectedStatusCode);
+        return $this->post($requestUrl, $options, $this->token, $expectedStatusCodes);
     }
 
     /**
@@ -65,7 +65,7 @@ abstract class ResourceClient extends AbstractClient
      * @param array $pathPlaceholderValues
      * @param array $options
      * @param array $queryParameters
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
      * @throws GuzzleException
      * @throws UnexpectedStatusCodeException
@@ -75,11 +75,11 @@ abstract class ResourceClient extends AbstractClient
         array $pathPlaceholderValues,
         array $options = [],
         array $queryParameters = [],
-        int $expectedStatusCode = 200
+        array $expectedStatusCodes = [200]
     ): array {
         $requestUrl = $this->replaceUrlPlaceHolders($resourcePath->value, $pathPlaceholderValues);
         $requestUrl = $this->addQueryParameters($requestUrl, $queryParameters);
-        return $this->patch($requestUrl, $options, $this->token, $expectedStatusCode);
+        return $this->patch($requestUrl, $options, $this->token, $expectedStatusCodes);
     }
 
     /**
@@ -87,7 +87,7 @@ abstract class ResourceClient extends AbstractClient
      * @param array $pathPlaceholderValues
      * @param array $options
      * @param array $queryParameters
-     * @param int $expectedStatusCode
+     * @param array $expectedStatusCodes
      * @return array
      * @throws GuzzleException
      * @throws UnexpectedStatusCodeException
@@ -97,11 +97,11 @@ abstract class ResourceClient extends AbstractClient
         array $pathPlaceholderValues,
         array $options = [],
         array $queryParameters = [],
-        int $expectedStatusCode = 200
+        array $expectedStatusCodes = [200]
     ): array {
         $requestUrl = $this->replaceUrlPlaceHolders($resourcePath->value, $pathPlaceholderValues);
         $requestUrl = $this->addQueryParameters($requestUrl, $queryParameters);
-        return $this->put($requestUrl, $options, $this->token, $expectedStatusCode);
+        return $this->put($requestUrl, $options, $this->token, $expectedStatusCodes);
     }
 
     /**
