@@ -12,7 +12,7 @@ class AppFolderClient extends ResourceClient
     {
         return $this->getByResourcePath(
             AppFolder::ITEM,
-            ['fileName' => $fileName],
+            ['filename' => $fileName],
             $options,
             $queryParameters
         );
@@ -25,7 +25,7 @@ class AppFolderClient extends ResourceClient
 
         return $this->postByResourcePath(
             AppFolder::ITEM,
-            ['fileName' => $fileName],
+            ['filename' => $fileName],
             $options,
             $queryParameters,
             [201]
@@ -57,6 +57,24 @@ class AppFolderClient extends ResourceClient
         return $this->putByResourcePath(
             AppFolder::CONTENT,
             ['filename' => $fileName],
+            $options,
+            $queryParameters,
+            [200, 201]
+        );
+    }
+
+    public function uploadFileByParent(
+        string $parentId,
+        string $fileName,
+        string $content,
+        array $options = [],
+        array $queryParameters = []
+    ): array {
+        $options = array_merge_recursive(['body' => $content], $options);
+
+        return $this->putByResourcePath(
+            AppFolder::ITEMS_CONTENT,
+            ['filename' => $fileName, 'parent-id' => $parentId],
             $options,
             $queryParameters,
             [200, 201]

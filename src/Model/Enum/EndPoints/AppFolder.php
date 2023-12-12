@@ -8,6 +8,7 @@ enum AppFolder: string implements ResourceEndpointInterface
 {
     case ROOT = '/drive/special/approot';
     case ROOT_CHILDREN = '/drive/special/approot/children';
-    case ITEM = '/drive/special/approot:/{fileName}';
+    case ITEM = '/drive/special/approot:/{filename}';
     case CONTENT = '/drive/special/approot:/{filename}:/content';
+    case ITEMS_CONTENT = '/drive/special/approot/items/{parent-id}:/{filename}:/content';
 }
