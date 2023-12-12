@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Balu\OneDriveSdk\Model\Enum\EndPoints;
 
-enum AppFolder implements ResourceEndpointInterface: string
+enum AppFolder: string implements ResourceEndpointInterface
 {
     case ROOT = '/drive/special/approot';
     case ROOT_CHILDREN = '/drive/special/approot/children';
