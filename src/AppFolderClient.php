@@ -32,6 +32,19 @@ class AppFolderClient extends ResourceClient
         );
     }
 
+    public function createAppRootFolder(array $jsonPayload, array $options = [], array $queryParameters = []): array
+    {
+        $options = array_merge_recursive(['headers' => ['Content-Type' => 'application/json']], $options);
+        $options = array_merge_recursive(['body' => json_encode($jsonPayload)], $options);
+
+        return $this->postByResourcePath(
+            AppFolder::ROOT_CHILDREN,
+            $options,
+            $queryParameters,
+            [201]
+        );
+    }
+
     public function uploadFile(
         string $fileName,
         string $content,
