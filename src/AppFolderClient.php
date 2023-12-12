@@ -39,6 +39,7 @@ class AppFolderClient extends ResourceClient
 
         return $this->postByResourcePath(
             AppFolder::ROOT_CHILDREN,
+            [],
             $options,
             $queryParameters,
             [201]
