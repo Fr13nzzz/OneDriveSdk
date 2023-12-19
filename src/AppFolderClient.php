@@ -8,6 +8,11 @@ use Balu\OneDriveSdk\Model\Enum\EndPoints\AppFolder;
 
 class AppFolderClient extends ResourceClient
 {
+    public function getMetadata(array $options = [], array $queryParameters = []): array
+    {
+        return $this->getByResourcePath(AppFolder::ROOT, [], $options, $queryParameters);
+    }
+
     public function getItem(string $fileName, array $options = [], array $queryParameters = []): array
     {
         return $this->getByResourcePath(
@@ -57,24 +62,6 @@ class AppFolderClient extends ResourceClient
         return $this->putByResourcePath(
             AppFolder::CONTENT,
             ['filename' => $fileName],
-            $options,
-            $queryParameters,
-            [200, 201]
-        );
-    }
-
-    public function uploadFileByParent(
-        string $parentId,
-        string $fileName,
-        string $content,
-        array $options = [],
-        array $queryParameters = []
-    ): array {
-        $options = array_merge_recursive(['body' => $content], $options);
-
-        return $this->putByResourcePath(
-            AppFolder::ITEMS_CONTENT,
-            ['filename' => $fileName, 'parent-id' => $parentId],
             $options,
             $queryParameters,
             [200, 201]
